@@ -1,0 +1,34 @@
+from PIL import Image
+import os
+
+images = [
+    r"C:\Users\yadidiahk\Downloads\nike.png",
+    r"C:\Users\yadidiahk\Downloads\nintendo.jpg",
+    r"C:\Users\yadidiahk\Downloads\gt86.jpg",
+    r"C:\Users\yadidiahk\Downloads\lego.jpg",
+    r"C:\Users\yadidiahk\Downloads\sony.jpeg",
+]
+
+for i in range(len(images)):
+    im = Image.open(images[i])
+
+    # Print original size
+    print(f"Original size of {images[i]}: {im.size}")
+
+    # Resize image
+    new_h = 200
+    new_w = int(new_h / im.height * im.width)
+    new_size = im.resize((new_w, new_h))
+
+    # Print new size
+    print(f"Resized size of {images[i]}: {new_size.size}")
+
+    # Save the resized image with the same file name and extension
+    base_path, ext = os.path.splitext(images[i])
+    new_file_path = f"{base_path}_resized{ext}"
+    new_size.save(new_file_path)
+
+    # Optionally, display the resized image
+    new_size.show()
+
+print("Resizing and saving complete.")
