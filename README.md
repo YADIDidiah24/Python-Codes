@@ -1,4 +1,4 @@
-# 🐍 Python Codes Directory
+# Python Codes Directory
 
 Welcome to the Python Codes Directory! Here you'll find various Python projects and scripts covering different topics and applications.
 
