@@ -1,6 +1,7 @@
 Project Description 
 This is a real-life business app that maintains information about the menu of a restaurant.  Business Description are as follows:
 
+built using My Sql And PySimpleGui database is not normalised to first normal form.
 •	a database-oriented application for the menu of a restaurant. This menu consists of several meals. Each meal has a name, price, type (drink or sandwich) and the comprising list of ingredients.
 •	Front-End UI: using PySimpleGui
 •	Storage and managing information about the restaurant menu. 

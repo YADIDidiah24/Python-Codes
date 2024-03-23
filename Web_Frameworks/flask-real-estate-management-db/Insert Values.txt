@@ -1,0 +1,46 @@
+-- Inserting values into Properties table
+INSERT INTO Properties (PropertyID, Address, City, State, ZIP, PropertyType, Bedrooms, Bathrooms, SquareFeet, Price)
+VALUES
+(1, '123 Main St', 'Anytown', 'CA', '12345', 'Single Family Home', 3, 2, 2000, 350000.00),
+(2, '456 Elm St', 'Sometown', 'NY', '54321', 'Apartment', 2, 1, 1200, 250000.00),
+(3, '789 Oak St', 'Othertown', 'TX', '67890', 'Condo', 1, 1, 800, 150000.00);
+
+-- Inserting values into Offices table
+INSERT INTO Offices (OfficeID, OfficeName, Address, City, State, ZIP)
+VALUES
+(1, 'Main Office', '100 Business Ave', 'Anytown', 'CA', '12345'),
+(2, 'Branch Office', '200 Commerce St', 'Sometown', 'NY', '54321');
+
+-- Inserting values into Agents table
+INSERT INTO Agents (AgentID, FirstName, LastName, Email, Phone, OfficeID)
+VALUES
+(1, 'John', 'Doe', 'john.doe@example.com', '555-1234', 1),
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '555-5678', 2);
+
+-- Inserting values into Clients table
+INSERT INTO Clients (ClientID, FirstName, LastName, Email, Phone)
+VALUES
+(1, 'Alice', 'Johnson', 'alice@example.com', '555-1111'),
+(2, 'Bob', 'Williams', 'bob@example.com', '555-2222');
+
+-- Inserting values into Transactions table
+INSERT INTO Transactions (TransactionID, PropertyID, AgentID, ClientID, TransactionDate, Price, PaymentType)
+VALUES
+(1, 1, 1, 1, '2024-03-13', 350000.00, 'Cash'),
+(2, 2, 2, 2, '2024-03-14', 250000.00, 'Mortgage');
+
+
+update properties set ImageID = 1 where propertyID = 1;
+INSERT INTO propertyimages (PropertyID, ImageData) VALUES (%s, %s)
+
+INSERT INTO `clients` (`ClientID`, `FirstName`, `LastName`, `Email`, `Phone`)  VALUES  (3, 'Daniel', 'Rodriguez', 'daniel.rodriguez@example.com', '111-222-3333'), (4, 'Sophia', 'Hernandez', 'sophia.hernandez@example.com', '444-555-6666'), (5, 'Logan', 'Gonzalez', 'logan.gonzalez@example.com', '777-888-9999'), (6, 'Isabella', 'Wilson', 'isabella.wilson@example.com', '222-333-4444'), (7, 'Alexander', 'Taylor', 'alex.taylor@example.com', '555-666-7777')
+
+INSERT INTO `offices` (`OfficeID`, `OfficeName`, `Address`, `City`, `State`, `ZIP`)  VALUES  (3, 'Hillside Realty', '789 Hilltop Ave', 'Hilltown', 'CA', '54321'), (4, 'Lakefront Real Estate', '101 Lakeview Dr', 'Lakeside', 'NY', '12345'), (5, 'Forest Properties', '456 Forest Ln', 'Forestville', 'FL', '98765')
+
+INSERT INTO `agents` (`AgentID`, `FirstName`, `LastName`, `Email`, `Phone`, `OfficeID`)  VALUES  (3, 'Sarah', 'Johnson', 'sarah.johnson@example.com', '333-444-5555', 3), (4, 'Christopher', 'Garcia', 'chris.garcia@example.com', '666-777-8888', 4), (5, 'Amanda', 'Martinez', 'amanda.martinez@example.com', '999-000-1111', 2)
+
+INSERT INTO `properties` (`PropertyID`, `Address`, `City`, `State`, `ZIP`, `PropertyType`, `Bedrooms`, `Bathrooms`, `SquareFeet`, `Price`, `image`) VALUES  (4, '456 Lakeview Ave', 'Lakeside', 'NY', '12345', 'Condo', 2, 2, 1500, 300000.00, NULL), (5, '789 Forest Dr', 'Forestville', 'FL', '98765', 'Townhouse', 3, 2, 2000, 350000.00, NULL), (6, '101 Valley Ct', 'Valley Town', 'CO', '13579', 'Duplex', 5, 4, 3200, 500000.00, NULL), (7, '555 Skyline Ave', 'Sky City', 'IL', '24680', 'Apartment', 1, 1, 800, 200000.00, NULL)
+
+INSERT INTO `transactions` (`TransactionID`, `PropertyID`, `AgentID`, `ClientID`, `TransactionDate`, `Price`, `PaymentType`) VALUES (3, 5, 3, 3, '2024-03-15', 400000.00, 'Cash'), (4, 6, 4, 4, '2024-03-16', 300000.00, 'Mortgage'), (5, 3, 5, 5, '2024-03-17', 350000.00, 'Cash')
+
+INSERT INTO `properties` (`PropertyID`, `Address`, `City`, `State`, `ZIP`, `PropertyType`, `Bedrooms`, `Bathrooms`, `SquareFeet`, `Price`, `image`) VALUES (8, '888 Maple Ln', 'Hilltown', 'CA', '54321', 'Single Family Home', 3, 2, 1800, 320000.00, NULL), (9, '999 Oak St', 'Lakeside', 'NY', '12345', 'Condo', 1, 1, 900, 200000.00, NULL), (10, '777 Elm Dr', 'Forestville', 'FL', '98765', 'Townhouse', 2, 2, 1600, 280000.00, NULL)
