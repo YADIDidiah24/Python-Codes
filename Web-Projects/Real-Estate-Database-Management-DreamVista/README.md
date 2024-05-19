@@ -229,3 +229,23 @@ The `__main__` block starts the Flask application and runs it in debug mode.
 
 # The style.css file contains global styles for the website, including font choices, background colors, and container widths. It styles the header with a dark blue background, navigation with white text, and hover effects. Main content is styled with margins, form controls with border radius, and cards with a hover effect and box shadow. The footer has a dark blue background and white text, with customized alignment for responsiveness. Additionally, an 'about' class is defined for left-aligned text.
 
+
+# Installation Instructions
+
+```sh
+To install and run the Django Marketplace project locally, follow these steps:
+
+
+
+1. **Install dependencies**: 
+   pip install Flask
+
+2. **Run the development server**: 
+   python app.py
+
+```
+
+  
+## [Yadidiah Kanaparthi](https://github.com/YADIDidiah24)  @ 2024
+
+
