@@ -44,3 +44,6 @@ INSERT INTO `properties` (`PropertyID`, `Address`, `City`, `State`, `ZIP`, `Prop
 INSERT INTO `transactions` (`TransactionID`, `PropertyID`, `AgentID`, `ClientID`, `TransactionDate`, `Price`, `PaymentType`) VALUES (3, 5, 3, 3, '2024-03-15', 400000.00, 'Cash'), (4, 6, 4, 4, '2024-03-16', 300000.00, 'Mortgage'), (5, 3, 5, 5, '2024-03-17', 350000.00, 'Cash')
 
 INSERT INTO `properties` (`PropertyID`, `Address`, `City`, `State`, `ZIP`, `PropertyType`, `Bedrooms`, `Bathrooms`, `SquareFeet`, `Price`, `image`) VALUES (8, '888 Maple Ln', 'Hilltown', 'CA', '54321', 'Single Family Home', 3, 2, 1800, 320000.00, NULL), (9, '999 Oak St', 'Lakeside', 'NY', '12345', 'Condo', 1, 1, 900, 200000.00, NULL), (10, '777 Elm Dr', 'Forestville', 'FL', '98765', 'Townhouse', 2, 2, 1600, 280000.00, NULL)
+
+INSERT INTO `properties` (`PropertyID`, `Address`, `City`, `State`, `ZIP`, `PropertyType`, `Bedrooms`, `Bathrooms`, `SquareFeet`, `Price`, `image`, `AgentID`) VALUES  (11, '111 Pine St', 'Valley Town', 'CO', '13579', 'Single Family Home', 4, 3, 2500, 450000.00, NULL, 1),  (12, '222 Maple Ave', 'Sky City', 'IL', '24680', 'Condo', 2, 2, 1200, 220000.00, NULL, 2)
+
