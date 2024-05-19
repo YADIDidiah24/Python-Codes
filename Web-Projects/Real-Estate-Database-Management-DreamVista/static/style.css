@@ -1,0 +1,113 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5; /* Light Gray */
+    color: #333333; /* Dark Gray */
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* Header Styles */
+.header {
+    background-color: #0277bd; /* Dark Blue */
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Navigation Styles */
+.navbar-toggler {
+    border-color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffa000; /* Amber */
+    background-color: transparent;
+}
+
+/* Main Content Styles */
+.title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.card {
+    background-color: #fff;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.no-image {
+    padding: 70px 20px;
+    color: #888;
+    font-style: italic;
+    background-color: #f5f5f5; /* Light Gray */
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #0277bd; /* Dark Blue */
+    color: #fff;
+    padding: 40px 0; /* Increased padding for more presence */
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 0; /* Remove default margin for paragraphs */
+}
+
+/* Custom Footer Styles */
+.footer .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .footer .row {
+        flex-direction: column;
+    }
+}
+
+.horizontal-list {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+}
+
+.horizontal-list li {
+    margin-right: 10px; /* Adjust spacing between links */
+}
+.about{
+   text-align: left;
+}
