@@ -1,117 +1,231 @@
-# Web Application Description
+# Real Estate Database Management DreamVista
 
-## Overview
 
-This web application is designed for real estate management, offering features for managing properties, agents, clients, and user authentication. The application provides a platform for users to browse properties, search for specific criteria, add new properties to the database, and interact with agents and clients.
 
-## Technologies Used
+# app.py
 
-- **Frontend:** HTML, CSS (Bootstrap)
-- **Backend:** Python (Flask)
-- **Database:** MySQL
-- **Image Processing:** PIL (Python Imaging Library)
+This script contains the backend code for a Flask web application managing a real estate management system.
 
-## Files and Templates
+## Libraries and Configuration
 
-### `base.html`
+The script imports necessary libraries such as Flask, render_template, request, redirect, url_for, session, bcrypt, mysql.connector, PIL, base64, and io. It also configures the Flask application, sets up a secret key, connects to the MySQL database, and initializes a cursor object.
 
-- **Description:** The base template serves as the foundation for all other templates in the application, providing a common structure for header, footer, and navigation elements.
-- **Features:**
-  - Dynamic title based on the specific page being rendered.
-  - Bootstrap integration for responsive design.
-  - Navigation links for agents, clients, offices, transactions, login, register, and contact.
-  - Conditional rendering of admin-specific links (transactions, add property).
-  - Footer with project information, menu links, and copyright details.
+## Decorators
 
-### `index.html`
+- `login_required_for_agents`: Ensures that only agents can access certain routes.
+- `login_for_admin`: Ensures that only admins can access certain routes.
 
-- **Description:** The index template displays the main landing page of the application, featuring a search form for finding properties based on location, price range, property type, bedrooms, bathrooms, and square footage. It also displays a list of properties matching the search criteria.
-- **Features:**
-  - Search form with input fields for location, price range, property type, bedrooms, bathrooms, and square footage.
-  - Display of properties with details such as title, address, property type, bedrooms, bathrooms, square footage, and price.
-  - Options to manage and delete properties.
+## Routes and Functionality
 
-### `add_property.html`
+- `/`: Renders the index page showing all properties.
+- `/agents`: Renders a page showing all agents.
+- `/clients`: Renders a page showing all clients.
+- `/offices`: Renders a page showing all offices.
+- `/transactions`: Renders a page showing all transactions.
+- `/search_properties`: Searches properties based on various criteria.
+- `/filter_properties_by_type/<property_type>`: Filters properties by a specific type.
+- `/clear_filters`: Clears all filters.
+- `/register`: Allows admins to register new users.
+- `/login`: Handles user authentication and login.
+- `/logout`: Logs the user out.
+- `/add_property`: Allows admins to add new properties.
+- `/manage_properties/<int:property_id>`: Allows agents to manage properties.
+- `/delete_property/<int:property_id>`: Allows agents to delete properties.
 
-- **Description:** The add property template allows users to add a new property to the database by providing details such as address, city, state, ZIP code, property type, bedrooms, bathrooms, square footage, price, and an image upload field.
-- **Features:**
-  - Form fields for entering property details.
-  - Input validation for required fields.
-  - File upload field for property images.
+## Property Data Handling
 
-### `agents.html`
+- `prepare_property_data_with_images`: Prepares property data along with images for rendering.
 
-- **Description:** The agents template displays a list of agents with their details, including agent ID, name, email, phone, and office ID.
-- **Features:**
-  - Tabular display of agent details.
-  - Alternating row colors for better readability.
+## Error Handling
 
-### `clients.html`
+The script includes error handling for database operations.
 
-- **Description:** The clients template displays a list of clients with their details, including client ID, name, email, and phone.
-- **Features:**
-  - Tabular display of client details.
-  - Alternating row colors for better readability.
+## Main Function
 
-### `login.html`
+The `__main__` block starts the Flask application and runs it in debug mode.
 
-- **Description:** The login template provides a form for users to log in to their accounts, with fields for username and password.
-- **Features:**
-  - Form fields for entering login credentials.
-  - Error message display for authentication failures.
 
-## Recommendations for Improvement
 
-1. Ensure consistent styling across all pages for a cohesive user experience.
-2. Implement responsive design for better usability on various devices.
-3. Enhance error handling and validation for forms to improve user feedback.
-4. Strengthen security measures, such as password hashing and HTTPS usage.
-5. Ensure accessibility standards are met for users with disabilities.
-6. Add comments to the code for better readability and maintainability.
-7. Conduct thorough testing to identify and fix any bugs or issues.
 
-With these enhancements, the web application can offer a polished and user-friendly experience for managing real estate properties, agents, and clients.
+# HTML Code Description
 
-## Template Descriptions
+## Base HTML Structure
 
-### `manage_property.html`
+- **Document Type Declaration (DOCTYPE):**
+  - Declares the document type and version of HTML being used.
 
-- **Description:** This template allows users to manage property details such as property type and address.
-- **Features:**
-  - Form fields for editing property type and address.
-  - Save changes button to submit the updated property details.
+- **Language Attribute:**
+  - Specifies the language of the document, set to English (`en`).
 
-### `offices.html`
+- **Head Section:**
+  - Contains metadata about the document and links to external resources.
+  - Character set (`meta charset`) is set to UTF-8.
+  - Viewport meta tag (`meta name="viewport"`) adjusts the page's viewport to the device's screen width.
 
-- **Description:** The offices template displays a list of offices with their details, including office ID, name, address, city, state, and ZIP code.
-- **Features:**
-  - Tabular display of office details.
-  - Alternating row colors for better readability.
+- **Title Tag:**
+  - Sets the title of the page using a block statement (`{% block title %}`) which can be overridden in child templates.
+  - Default title is "DreamVista Homes 🏠🌟 - Find Your Perfect Property".
 
-### `register.html`
+- **External CSS:**
+  - Links to Bootstrap CSS (`bootstrap.min.css`) and a custom CSS file (`style.css`).
 
-- **Description:** The register template provides a form for users to register new accounts with the application, including fields for username, password, role, and validation password.
-- **Features:**
-  - Form fields for entering registration details.
-  - Dropdown menu for selecting user role.
-  - Validation password field for confirming password.
+## Body Section
 
-### `transactions.html`
+- **Header Section:**
+  - Contains the site's navigation bar (`nav`) with branding and menu items.
+  - Menu items include links to "Agents", "Clients", "Offices", "Transactions" (if the user is an admin), "Add Property" (if the user is an admin), "Logout" (if a user is logged in), "Login", "Sign Up", and "Contact".
 
-- **Description:** The transactions template displays a list of all transactions with their details, including transaction ID, date, client, location, agent, office, price, payment type, property, house type, beds/baths, and size.
-- **Features:**
-  - Tabular display of transaction details.
-  - Alternating row colors for better readability.
+- **Main Section:**
+  - Contains the main content of each page, which will be populated by child templates.
 
-## Recommendations for Improvement
+- **Footer Section:**
+  - Appears only on the home page (`request.path == '/'`).
+  - Contains information about the project, menu links, and copyright information.
+  - Menu links include "About", "Contact", "Privacy Policy", and "Terms of Use".
 
-1. Ensure consistent styling across all pages for a cohesive user experience.
-2. Implement responsive design for better usability on various devices.
-3. Enhance error handling and validation for forms to improve user feedback.
-4. Strengthen security measures, such as password hashing and HTTPS usage.
-5. Ensure accessibility standards are met for users with disabilities.
-6. Add comments to the code for better readability and maintainability.
-7. Conduct thorough testing to identify and fix any bugs or issues.
+## Script Tags
+- **JavaScript Libraries:**
+  - Includes jQuery and Popper.js for Bootstrap functionality.
 
-With these enhancements, the web application can offer a polished and user-friendly experience for managing real estate properties, agents, and clients.
+## Index HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Properties - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the index page.
+  - Displays a title "Find Your Perfect Property".
+  - Includes a form for filtering properties based on location, price range, property type, bedrooms, bathrooms, and square feet.
+  - If any filters are applied, provides a button to clear them.
+  - Displays properties in cards if available, showing details like image, title, location, type, bedrooms, bathrooms, square feet, and price.
+  - Provides buttons to manage and delete properties, with confirmation for deletion.
+  - If no properties are found, displays an info alert indicating so.
+
+## Agents HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Agents - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the agents page.
+  - Displays a title "Agents".
+  - Includes a responsive table to display agent details.
+  - The table has the following columns: "Agent ID", "Name", "Email", "Phone", and "Office ID".
+  - Iterates over the list of agents to populate the table rows.
+  - Alternates row classes for styling purposes: even-indexed rows have the class "even", and odd-indexed rows have the class "odd".
+
+## Clients HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Clients - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the clients page.
+  - Displays a title "Clients".
+  - Includes a responsive table to display client details.
+  - The table has the following columns: "Client ID", "Name", "Email", and "Phone".
+  - Iterates over the list of clients to populate the table rows.
+  - Alternates row classes for styling purposes: even-indexed rows have the class "even", and odd-indexed rows have the class "odd".
+
+## Offices HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Offices - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the offices page.
+  - Displays a title "Offices".
+  - Includes a responsive table to display office details.
+  - The table has the following columns: "Office ID", "Office Name", "Address", "City", "State", and "ZIP".
+  - Iterates over the list of offices to populate the table rows.
+  - Alternates row classes for styling purposes: even-indexed rows have the class "even", and odd-indexed rows have the class "odd".
+
+## Add Property HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Add Property - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the add property page.
+  - Displays a title "Add Property".
+  - Includes a form to add a new property with fields for:
+    - **Address:** Text input field for the property's address, marked as required.
+    - **City:** Text input field for the property's city, marked as required.
+    - **State:** Text input field for the property's state, marked as required.
+    - **ZIP Code:** Text input field for the property's ZIP code, marked as required.
+    - **Property Type:** Text input field for the type of property, marked as required.
+    - **Bedrooms:** Number input field for the number of bedrooms, marked as required.
+    - **Bathrooms:** Number input field for the number of bathrooms, marked as required.
+    - **Square Feet:** Number input field for the square footage of the property, marked as required.
+    - **Price:** Number input field for the price of the property, marked as required.
+    - **Image:** File input field for uploading an image of the property, accepts image files and is marked as required.
+  - Submit button to add the property.
+
+## Manage Properties HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Manage Property - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the manage property page.
+  - Displays a header "Manage Property".
+  - Includes a form to manage and update property details:
+    - **Property Type:** Text input field for the type of property, pre-filled with the current property type.
+    - **Address:** Text input field for the property's address, pre-filled with the current address.
+  - Submit button to save changes to the property.
+  ## Login HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Login - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the login page.
+  - Displays a title "Login".
+  - Includes a form to login with the following fields:
+    - **Username:** Text input field for the username, marked as required.
+    - **Password:** Password input field for the password, marked as required.
+  - Submit button to login.
+  - If there is a `message` variable provided (e.g., error message), it displays an alert with the message content.
+
+## Register HTML
+
+- **Template Inheritance:**
+  - Extends `base.html`, inheriting its structure and content.
+
+- **Title Block Override:**
+  - Overrides the title block from the base template to set the title as "Register - Dream Homes".
+
+- **Content Block:**
+  - Contains the main content of the register page.
+  - Displays a title "Register".
+  - Includes a form to register a new user with the following fields:
+    - **Username:** Text input field for the username, marked as required.
+    - **Password:** Password input field for the password, marked as required.
+    - **Role:** Dropdown select input for the user's role with options for "Admin", "Agent", and "Client".
+    - **Validation Password:** Password input field for the validation password, marked as required.
+  - Submit button to register.
+  - If there is a `message` variable provided (e.g., error message), it displays an alert with the message content.
+
+# The style.css file contains global styles for the website, including font choices, background colors, and container widths. It styles the header with a dark blue background, navigation with white text, and hover effects. Main content is styled with margins, form controls with border radius, and cards with a hover effect and box shadow. The footer has a dark blue background and white text, with customized alignment for responsiveness. Additionally, an 'about' class is defined for left-aligned text.
 
