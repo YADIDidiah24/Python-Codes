@@ -1,0 +1,75 @@
+CREATE DATABASE `real_estate_management_system` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+CREATE TABLE `agents` (
+  `AgentID` int NOT NULL,
+  `FirstName` varchar(50) DEFAULT NULL,
+  `LastName` varchar(50) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `Phone` varchar(20) DEFAULT NULL,
+  `OfficeID` int DEFAULT NULL,
+  PRIMARY KEY (`AgentID`),
+  KEY `OfficeID` (`OfficeID`),
+  CONSTRAINT `agents_ibfk_1` FOREIGN KEY (`OfficeID`) REFERENCES `offices` (`OfficeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `clients` (
+  `ClientID` int NOT NULL,
+  `FirstName` varchar(50) DEFAULT NULL,
+  `LastName` varchar(50) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `Phone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ClientID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `offices` (
+  `OfficeID` int NOT NULL,
+  `OfficeName` varchar(100) DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `City` varchar(100) DEFAULT NULL,
+  `State` varchar(50) DEFAULT NULL,
+  `ZIP` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`OfficeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `properties` (
+  `PropertyID` int NOT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `City` varchar(100) DEFAULT NULL,
+  `State` varchar(50) DEFAULT NULL,
+  `ZIP` varchar(20) DEFAULT NULL,
+  `PropertyType` varchar(50) DEFAULT NULL,
+  `Bedrooms` int DEFAULT NULL,
+  `Bathrooms` int DEFAULT NULL,
+  `SquareFeet` int DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL,
+  `image` longblob,
+  `AgentID` int DEFAULT NULL,
+  PRIMARY KEY (`PropertyID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `transactions` (
+  `TransactionID` int NOT NULL,
+  `PropertyID` int DEFAULT NULL,
+  `AgentID` int DEFAULT NULL,
+  `ClientID` int DEFAULT NULL,
+  `TransactionDate` date DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL,
+  `PaymentType` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`TransactionID`),
+  KEY `PropertyID` (`PropertyID`),
+  KEY `AgentID` (`AgentID`),
+  KEY `ClientID` (`ClientID`),
+  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`PropertyID`) REFERENCES `properties` (`PropertyID`),
+  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`AgentID`) REFERENCES `agents` (`AgentID`),
+  CONSTRAINT `transactions_ibfk_3` FOREIGN KEY (`ClientID`) REFERENCES `clients` (`ClientID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password_hash` varchar(100) NOT NULL,
+  `role` enum('admin','agent','client') NOT NULL DEFAULT 'client',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
