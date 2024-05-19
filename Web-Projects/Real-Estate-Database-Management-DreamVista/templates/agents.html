@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Agents - Dream Homes{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title mt-5">Agents</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Agent ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Office ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for agent in agents %}
+                        {% if loop.index % 2 == 0 %}
+                            <tr class="even">
+                        {% else %}
+                            <tr class="odd">
+                        {% endif %}
+                            <td>{{ agent[0] }}</td>
+                            <td>{{ agent[1] }} {{ agent[2] }}</td>
+                            <td>{{ agent[3] }}</td>
+                            <td>{{ agent[4] }}</td>
+                            <td>{{ agent[5] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

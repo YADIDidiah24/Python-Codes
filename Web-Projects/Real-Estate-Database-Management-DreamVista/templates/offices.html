@@ -1,0 +1,41 @@
+<!-- offices.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Offices - Dream Homes{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title mt-5">Offices</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Office ID</th>
+                        <th>Office Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>ZIP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for office in offices %}
+                        {% if loop.index % 2 == 0 %}
+                            <tr class="even">
+                        {% else %}
+                            <tr class="odd">
+                        {% endif %}
+                            <td>{{ office[0] }}</td>
+                            <td>{{ office[1] }}</td>
+                            <td>{{ office[2] }}</td>
+                            <td>{{ office[3] }}</td>
+                            <td>{{ office[4] }}</td>
+                            <td>{{ office[5] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

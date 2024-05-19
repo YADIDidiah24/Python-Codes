@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Transactions - Dream Homes{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title mt-5">All Transactions</h1>
+        <div class="table-responsive">
+            <table class="table table-striped transactions-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Location</th>
+                        <th>Agent</th>
+                        <th>Office</th>
+                        <th>Price</th>
+                        <th>Payment Type</th>
+                        <th>Property</th>
+                        <th>House Type</th>
+                        <th>Beds/Baths</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        {% if loop.index % 2 == 0 %}
+                            <tr class="even">
+                        {% else %}
+                            <tr class="odd">
+                        {% endif %}
+                            <td>{{ transaction[0] }}</td>
+                            <td>{{ transaction[1] }}</td>
+                            <td>{{ transaction[2] }}</td>
+                            <td>{{ transaction[3] }}</td>
+                            <td>{{ transaction[4] }}</td>
+                            <td>{{ transaction[5] }}</td>
+                            <td>{{ transaction[6] }}</td>
+                            <td>{{ transaction[7] }}</td>
+                            <td>{{ transaction[8] }}</td>
+                            <td>{{ transaction[9] }}</td>
+                            <td>{{ transaction[10] }}</td>
+                            <td>{{ transaction[11] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

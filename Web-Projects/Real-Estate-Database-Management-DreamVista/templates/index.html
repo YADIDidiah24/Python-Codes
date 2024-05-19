@@ -1,0 +1,105 @@
+<!-- base.html -->
+
+
+{% extends 'base.html' %}
+
+{% block title %}Properties - Dream Homes{% endblock %}
+
+{% block content %}
+<h1 class="title mt-5">Find Your Perfect Property</h1>
+
+<form action="{{ url_for('search_properties') }}" method="GET">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ location }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="price_from">Price Range</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="price_from" name="price_from" placeholder="From" value="{{ price_from }}">
+                <input type="number" class="form-control" id="price_to" name="price_to" placeholder="To" value="{{ price_to }}">
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="property_type">Property Type</label>
+            <select class="form-control" id="property_type" name="property_type">
+                <option value="" {% if not property_type %}selected{% endif %}>Any</option>
+                <option value="House" {% if property_type == 'House' %}selected{% endif %}>House</option>
+                <option value="Apartment" {% if property_type == 'Apartment' %}selected{% endif %}>Apartment</option>
+                <option value="Condo" {% if property_type == 'Condo' %}selected{% endif %}>Condo</option>
+                <!-- Add more property types as needed -->
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="bedrooms">Bedrooms</label>
+            <select class="form-control" id="bedrooms" name="bedrooms">
+                <option value="" {% if not bedrooms %}selected{% endif %}>Any</option>
+                <option value="1" {% if bedrooms == '1' %}selected{% endif %}>1</option>
+                <option value="2" {% if bedrooms == '2' %}selected{% endif %}>2</option>
+                <option value="3" {% if bedrooms == '3' %}selected{% endif %}>3</option>
+                <option value="4" {% if bedrooms == '4' %}selected{% endif %}>4</option>
+                <option value="5" {% if bedrooms == '5' %}selected{% endif %}>5</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="bathrooms">Bathrooms</label>
+            <select class="form-control" id="bathrooms" name="bathrooms">
+                <option value="" {% if not bathrooms %}selected{% endif %}>Any</option>
+                <option value="1" {% if bathrooms == '1' %}selected{% endif %}>1</option>
+                <option value="2" {% if bathrooms == '2' %}selected{% endif %}>2</option>
+                <option value="3" {% if bathrooms == '3' %}selected{% endif %}>3</option>
+                <option value="4" {% if bathrooms == '4' %}selected{% endif %}>4</option>
+                <option value="5" {% if bathrooms == '5' %}selected{% endif %}>5</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="square_feet">Square Feet</label>
+            <input type="number" class="form-control" id="square_feet" name="square_feet" value="{{ square_feet }}">
+        </div>
+        <div class="form-group col-md-12 text-right">
+            <button type="submit" class="btn btn-primary mt-4">Search</button>
+            {% if location or price_from or price_to or property_type or bedrooms or bathrooms or square_feet %}
+                <a href="{{ url_for('clear_filters') }}" class="btn btn-danger mt-4 ml-2">Clear Filters</a>
+            {% endif %}
+        </div>
+    </div>
+</form>
+
+{% if properties %}
+    <div class="row">
+        {% for property_data, image_data in properties %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if image_data %}
+                    <img src="data:image/jpeg;base64,{{ image_data }}" class="card-img-top" alt="Property Image">
+                {% else %}
+                    <div class="no-image card-img-top">No image available</div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ property_data[1] }}</h5>
+                    <p class="card-text">{{ property_data[2] }}, {{ property_data[3] }} {{ property_data[4] }}</p>
+                    <p class="card-text">Type: {{ property_data[5] }}</p>
+                    <p class="card-text">Bedrooms: {{ property_data[6] }}</p>
+                    <p class="card-text">Bathrooms: {{ property_data[7] }}</p>
+                    <p class="card-text">Square Feet: {{ property_data[8] }}</p>
+                    <p class="card-text">Price: {{ property_data[9] }}</p>
+                    <div class="text-center">
+                        <a href="{{ url_for('manage_property', property_id=property_data[0]) }}" class="btn btn-primary">Manage</a>
+                        <form action="{{ url_for('delete_property', property_id=property_data[0]) }}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this property?')">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        No properties found.
+    </div>
+{% endif %}
+{% endblock %}
